@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:id="@+id/container"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:gravity="center"
+		android:id="@+id/settingview">
+
+		<ScrollView
+			android:layout_height="70dp"
+			android:layout_width="70dp"
+			android:background="@drawable/touxiang"
+			android:layout_marginTop="60dp"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:layout_marginTop="16dp"
+			android:text="@string/tk"
+			android:textColor="#FFFFFF"
+			android:layout_marginBottom="12dp"/>
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:text="@string/thinks"
+			android:layout_marginBottom="16dp"
+			android:textColor="#FFFFFF"
+			android:textSize="12sp"
+			android:gravity="center"/>
+
+	</LinearLayout>
+
+	<ListView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:id="@+id/mainListView1"
+		android:dividerHeight="0dp"
+		android:divider="#00FFFFFF"/>
+
+	<TextView
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:text="@string/aboutText"
+		android:textSize="12sp"
+		android:id="@+id/settingTextView"
+		android:layout_marginStart="15dp"/>
+
+</LinearLayout>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	
+	<string name="ok">确定</string>
+	<string name="no">取消</string>
+    <string name="app_name">ZML</string>
+	<string name="aboutText">版本:1.5.2
+		\n反馈QQ:1948226838
+		\nPS:长按复制QQ号\n
+		\n支持的话给我发个红包吧</string>
+	<string name="thinks">感谢\n\n防跳:JJ\n核心:Tiny\n支持:AIDE</string>
+	<string name="tk">By Tokyonth ©ZCL</string>
+	<string name="setting">设置</string>
+	<string name="custom">自定义</string>
+	<string name="start">开启</string>
+	<string name="stop">关闭</string>
+	<string name="check">查看</string>
+	<string name="pattern">模式</string>
+	<string name="about">关于</string>
+	<string name="upcolor">更换颜色</string>
+	<string name="inputColor">输入颜色代码:</string>
+	<string name="conf">配置</string>
+	<string name="clicksave">点击保存</string>
+	<string name="patternedit">模式编辑</string>
+	<string name="patternname">模式名字</string>
+	<string name="patterntext">模式内容</string>
+	<string name="beganpattern">已保存的模式:</string>
+	<string name="zt">状态 │</string>
+	<string name="net">流量:0\n内网IP:0</string>
+	<string name="tinycc">后台</string>
+	<string name="more">更多</string>
+	<string name="prm">普通删除</string>
+	<string name="rmall">全部删除</string>
+	<string name="srm">说明:\n普通删除:删除ML文件\n全部删除:删除所有文件,包括已保存的模式</string>
+	<string name="custompathtext">请输入文件绝对路径:</string>
+</resources>

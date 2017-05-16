@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@android:style/Theme.Holo.Light">
+	</style>
+	<style name="NoTitleBar" parent="@android:style/Theme.Holo.Light">
+		<item name="android:windowNoTitle">true</item>
+		</style>
+	<style name="BarTheme" parent="Theme.AppCompat.Light">
+		<item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+		<item name="android:statusBarColor">#FFFFFFFF</item>
+	</style>
+	<style name="Theme" parent="Theme.AppCompat.Light">
+	</style>
+	<style name="Dialogstyle" parent="android:Animation">          
+		<item name="@android:windowEnterAnimation">@anim/dialog_enter</item> 
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+    </style>  
+	
+	
+</resources>

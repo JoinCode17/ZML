@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:gravity="center"
+	android:id="@+id/container">
+
+	<LinearLayout
+		android:layout_height="match_parent"
+		android:layout_width="match_parent"
+		android:orientation="vertical">
+
+		<LinearLayout
+			android:layout_height="75dp"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="center"
+			android:id="@+id/customTop">
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:text="@string/custom"
+				android:layout_marginTop="12dp"
+				android:textColor="#FFFFFF"/>
+
+		</LinearLayout>
+
+		<android.support.v7.widget.CardView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			app:cardCornerRadius="4dp"
+			app:cardPreventCornerOverlap="true"
+			app:cardUseCompatPadding="true"
+			app:contentPadding="10dp"
+			android:layout_marginTop="10dp"
+			android:layout_marginEnd="10dp"
+			android:layout_marginStart="10dp">
+
+			<LinearLayout
+				android:layout_height="match_parent"
+				android:layout_width="match_parent"
+				android:orientation="vertical"
+				android:padding="16dp"
+				android:layout_weight="1.0">
+
+				<TextView
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:text="@string/custompathtext"
+					android:gravity="center"
+					android:textSize="14sp"
+					android:textStyle="bold"/>
+
+				<android.support.design.widget.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="26dp">
+
+					<EditText
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:ems="10"
+						android:hint="启动"
+						android:id="@+id/customEditTextStart"
+						android:textSize="12sp"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="12dp">
+
+					<EditText
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:ems="10"
+						android:hint="关闭"
+						android:id="@+id/customEditTextStop"
+						android:textSize="12sp"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="12dp">
+
+					<EditText
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:ems="10"
+						android:id="@+id/customEditTextCheck"
+						android:hint="查看"
+						android:textSize="12sp"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="12dp">
+
+					<EditText
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:ems="10"
+						android:hint="模式"
+						android:id="@+id/custommsedit"
+						android:textSize="12sp"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<android.support.design.widget.TextInputLayout
+					android:id="@+id/textInputLayout"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true"
+					android:layout_marginTop="12dp">
+
+					<EditText
+						android:layout_height="wrap_content"
+						android:layout_width="match_parent"
+						android:ems="10"
+						android:hint="配置"
+						android:id="@+id/customconfedit"
+						android:textSize="12sp"/>
+
+				</android.support.design.widget.TextInputLayout>
+
+				<LinearLayout
+					android:layout_height="wrap_content"
+					android:layout_width="match_parent"
+					android:orientation="horizontal"
+					android:layout_marginTop="10dp"
+					android:gravity="end">
+
+					<Switch
+						android:layout_height="wrap_content"
+						android:layout_width="wrap_content"
+						android:id="@+id/customSwitch"/>
+
+					<TextView
+						android:layout_height="match_parent"
+						android:layout_width="wrap_content"
+						android:text="是否启用?"
+						android:gravity="center"
+						android:layout_marginStart="10dp"/>
+
+				</LinearLayout>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.CardView>
+
+		<Button
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:text="保存路径"
+			android:id="@+id/customButton"
+			android:layout_marginTop="14dp"
+			android:layout_marginStart="10dp"
+			android:layout_marginEnd="10dp"/>
+
+	</LinearLayout>
+
+</LinearLayout>
+

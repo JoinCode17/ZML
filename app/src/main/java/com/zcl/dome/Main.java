@@ -17,7 +17,7 @@ import java.io.*;
 import java.util.*;
 import android.app.AlertDialog;
 
-public class MainActivity extends AppCompatActivity
+public class Main extends AppCompatActivity
 {	
 	/**
 	  *Create 2017.3.14 by Tokyonth
@@ -65,10 +65,9 @@ public class MainActivity extends AppCompatActivity
 	
 	private void State() {
 		tiny.setText("流量 : " + ObUtil.gets() + "\n内网 : " + ObUtil.getIp());
-		//String str1 = ProcessModel.execute(new String[]{"pgrep","Tiny"});
-		//String str2 = ProcessModel.execute(new String[]{"pgrep","tiny"});
-		String str1 = "tiny";
-		String str2 = ;
+		String str1 = ShellUtils.execCommand(new String[]{"pgrep Tiny"},false,true).successMsg;
+		String str2 = ShellUtils.execCommand(new String[]{"pgrep tiny"},false,true).successMsg;
+	//	ObUtil.mToast(container,str1+str2);
 			if (str1 == "" && str2 == ""){
 				tv.setText("未运行 ...");
 				tv.setTextColor(Color.parseColor("#FF3300"));
@@ -79,12 +78,12 @@ public class MainActivity extends AppCompatActivity
 		if (ObUtil.isVpn() == true){
 			local.setText("VPN模式!");
 		}else{
-			local.setText(ObUtil.readApn(MainActivity.this,"APN")/* + "\n" + readApn("IP")*/);
+			local.setText(ObUtil.readApn(Main.this,"APN")/* + "\n" + readApn("IP")*/);
 		 }
 	}
 	
 	private void getUID() {
-					List installedPackages = MainActivity.this.getPackageManager().getInstalledPackages(0);
+					List installedPackages = Main.this.getPackageManager().getInstalledPackages(0);
 					List arrayList = new ArrayList();
 					for (int i = 0;i < installedPackages.size();i++) {
 						if ((((PackageInfo) installedPackages.get(i)).applicationInfo.flags & 1) <= 0) {
@@ -108,7 +107,7 @@ public class MainActivity extends AppCompatActivity
 							}
 						});
 					listView.setAdapter(simpleAdapter);
-					AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+					AlertDialog.Builder builder = new AlertDialog.Builder(Main.this);
 					builder.setView(inflate).show();
   			  }
 	
@@ -135,14 +134,14 @@ public class MainActivity extends AppCompatActivity
 		int Int = sharedPreferences.getInt("CustomSwitch",0); 
 		File tfe = new File("/data/data/com.zcl.dome/files");
 		if (tfe.exists() == true || Int != 0){
-		progressDialog = ProgressDialog.show(MainActivity.this,null, "执行中，请稍候……");
+		progressDialog = ProgressDialog.show(Main.this,null, "执行中，请稍候……");
 		new Thread(new Runnable() {
 				@Override
 				public void run() {
 					Message msg = new Message();
 					msg.what = 2;
 					Bundle bundle = new Bundle();
-					bundle.putString("num",ProcessModel.execute(str));
+					bundle.putString("num",ShellUtils.execCommand(str,true,true).successMsg);
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 					handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler
@@ -160,10 +159,10 @@ public class MainActivity extends AppCompatActivity
 						break;
 					case 2:
 				String str = msg.getData().getString("num") + "";
-				if (ObUtil.isRoot() == false){
+				if (ShellUtils.checkRootPermission() == false){
 					ObUtil.mToast(container,"未获得ROOT!");
 				}else{
-					builder = new AlertDialog.Builder(MainActivity.this);
+					builder = new AlertDialog.Builder(Main.this);
 					builder.setTitle("执行结果:");
 					builder.setMessage(str);
 					builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -190,7 +189,7 @@ public class MainActivity extends AppCompatActivity
 	private void SetColor()
 	{
 		builder = new AlertDialog.Builder(this);
-		mview = View.inflate(MainActivity.this, R.layout.coloredit, null);	
+		mview = View.inflate(Main.this, R.layout.coloredit, null);	
 		edit = (EditText) mview.findViewById(R.id.editEditText1);
 		vc = mview.findViewById(R.id.editbj);
 		edit.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
@@ -206,14 +205,14 @@ public class MainActivity extends AppCompatActivity
 		builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int id) {
 				String mColor = edit.getText().toString();
-				if (mColor.length() < 9 ){
+				if (mColor.length() < 9){
 				ObUtil.mToast(container,"输入有误!");
 				}else{
 				if (mColor.equals("#ffffffff") | mColor.equals("#FFFFFFFF")){
 					ObUtil.mToast(container,"不建议设置为纯白色!");
 				}else{
 					setColor.setBackgroundColor(Color.parseColor(mColor));
-					ObUtil.Conf(MainActivity.this,1,"Color",mColor);
+					ObUtil.Conf(Main.this,1,"Color",mColor);
 				}
 				}
 			}
@@ -233,7 +232,7 @@ public class MainActivity extends AppCompatActivity
 								break;
 							case 1:
 								Intent intent = new Intent(android.provider.Settings.ACTION_APN_SETTINGS);
-								MainActivity.this.startActivity(intent);
+								Main.this.startActivity(intent);
 								break;
 							case 2:
 								
@@ -248,9 +247,9 @@ public class MainActivity extends AppCompatActivity
 		}
 		
 		private void SElinux(){
-			String s = ProcessModel.execute("getenforce");
+			String s = ShellUtils.execCommand("getenforce",false,true).successMsg;
 			if (Build.VERSION.SDK_INT >= 23 && s.equals("Enforcing\n")){
-			builder = new AlertDialog.Builder(MainActivity.this);
+			builder = new AlertDialog.Builder(Main.this);
 			builder.setCancelable(false);
 			builder.setMessage("检测到系统 => Android 6.0\n并且SELinux状态为Enforcing\n建议关闭SELinux\n是否关闭?");
 			builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -260,31 +259,29 @@ public class MainActivity extends AppCompatActivity
 					});
 				builder.setPositiveButton("关闭", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-							ProcessModel.execute(new String[]{"su","-c","setenforce 0"});
+							ShellUtils.execCommand(new String[]{"setenforce 0"},true,false);
 						}
 					});
 			builder.show();
 			}
 		}
-	/**
-	主界面按钮点击事件
-	*/
+
 	private void Click(){
 		final Intent intent = new Intent();
 		btn1.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{"su","-c",ObUtil.Conf(MainActivity.this,0,"Start","")});
+					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Start","")});
 				}});
 		btn2.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{"su","-c",ObUtil.Conf(MainActivity.this,0,"Stop","")});
+					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Stop","")});
 				}});
 		btn3.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{"su","-c",ObUtil.Conf(MainActivity.this,0,"Check","")});
+					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Check","")});
 				}});
 		btn4.setOnClickListener(new OnClickListener() {
 				@Override
@@ -294,22 +291,22 @@ public class MainActivity extends AppCompatActivity
 		btn5.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					intent.setClass(MainActivity.this, ConfigML.class);
-					intent.putExtra("Color",ObUtil.Conf(MainActivity.this,0,"Color",""));  
+					intent.setClass(Main.this, Config.class);
+					intent.putExtra("Color",ObUtil.Conf(Main.this,0,"Color",""));  
 					startActivity(intent);	
 				}});
 		btn6.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					intent.setClass(MainActivity.this, Pattern.class);
-					intent.putExtra("Color",ObUtil.Conf(MainActivity.this,0,"Color",""));  
+					intent.setClass(Main.this, Pattern.class);
+					intent.putExtra("Color",ObUtil.Conf(Main.this,0,"Color",""));  
 					startActivity(intent);
 				}});
 		btn7.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					intent.setClass(MainActivity.this, Setting.class);
-					intent.putExtra("Color",ObUtil.Conf(MainActivity.this,0,"Color",""));  
+					intent.setClass(Main.this, Setting.class);
+					intent.putExtra("Color",ObUtil.Conf(Main.this,0,"Color",""));  
 					startActivity(intent);
 				}});
 		btn8.setOnClickListener(new OnClickListener(){
@@ -342,15 +339,15 @@ public class MainActivity extends AppCompatActivity
 					while(true){
 						int Int = sharedPreferences.getInt("CustomSwitch",0);
 						if (Int == 0){
-							ObUtil.Conf(MainActivity.this,1,"Start","/data/data/com.zcl.dome/files/Start.sh");
-							ObUtil.Conf(MainActivity.this,1,"Stop","/data/data/com.zcl.dome/files/Stop.sh");
-							ObUtil.Conf(MainActivity.this,1,"Check","/data/data/com.zcl.dome/files/State.sh");
-							ObUtil.Conf(MainActivity.this,1,"Config","/data/data/com.zcl.dome/files/Start.sh");
+							ObUtil.Conf(Main.this,1,"Start","/data/data/com.zcl.dome/files/Start.sh");
+							ObUtil.Conf(Main.this,1,"Stop","/data/data/com.zcl.dome/files/Stop.sh");
+							ObUtil.Conf(Main.this,1,"Check","/data/data/com.zcl.dome/files/State.sh");
+							ObUtil.Conf(Main.this,1,"Config","/data/data/com.zcl.dome/files/Start.sh");
 						}else if (Int == 1){
-							ObUtil.Conf(MainActivity.this,1,"Start",ObUtil.Conf(MainActivity.this,0,"StartCustomPath",""));
-							ObUtil.Conf(MainActivity.this,1,"Stop",ObUtil.Conf(MainActivity.this,0,"StopCustomPath",""));
-							ObUtil.Conf(MainActivity.this,1,"Check",ObUtil.Conf(MainActivity.this,0,"CheckCustomPath",""));
-							ObUtil.Conf(MainActivity.this,1,"Config",ObUtil.Conf(MainActivity.this,0,"ConfigCustomPath",""));
+							ObUtil.Conf(Main.this,1,"Start",ObUtil.Conf(Main.this,0,"StartCustomPath",""));
+							ObUtil.Conf(Main.this,1,"Stop",ObUtil.Conf(Main.this,0,"StopCustomPath",""));
+							ObUtil.Conf(Main.this,1,"Check",ObUtil.Conf(Main.this,0,"CheckCustomPath",""));
+							ObUtil.Conf(Main.this,1,"Config",ObUtil.Conf(Main.this,0,"ConfigCustomPath",""));
 							}
 							}}}).start();	
 		String rColor = ObUtil.Conf(this,0,"Color","");

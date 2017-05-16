@@ -16,7 +16,7 @@ import java.lang.Process;
 
 public class Setting extends AppCompatActivity
 {
-	private final String Path = "/data/data/com.zcl.dome/files/";
+	private final String Path = "/data/data/com.zcl.dome/files";
 	//private final String UpdateLogName = "UpdateLog.txt";
 	private TextView Ab;
 	private View sv ;
@@ -24,7 +24,6 @@ public class Setting extends AppCompatActivity
 	private LinearLayout container;
 	private int Aboutindex = 1;
 	private AlertDialog.Builder builder;
-	private Process	p;
 	private ListAdapter adapter;
 	
 	private void initview(){
@@ -73,23 +72,15 @@ public class Setting extends AppCompatActivity
 		try
 		{
 			ObUtil.upZipFileTwo(f,FileDir);
-			p = Runtime.getRuntime().exec(new String[]{"chmod","-R","777",FileDir});
+			ShellUtils.execCommand(new String[]{"chmod","-R","777",FileDir},false,false);
 			ObUtil.mToast(container,"安装成功");
 			}catch (IOException e){
 			ObUtil.mToast(container,"安装失败!或者已经存在文件");
 		}
 	}
-	private boolean delete(){
-		/*File f = new File(Path);
-		return f.delete();*/
-		try
-		{
-			p= Runtime.getRuntime().exec(new String[]{"rm","-rf",Path});
-			return true;
-		}
-		catch (IOException e){
-			return false;
-		}
+	private void delete(){
+		ShellUtils.execCommand(new String[]{"rm -rf",Path},false,false);
+		ObUtil.mToast(container,"删除成功");
 	}
 	
 	private void About(){
@@ -141,11 +132,7 @@ public class Setting extends AppCompatActivity
 							install();
 							break;
 						case 1:
-							if (delete() == true){
-								ObUtil.mToast(container,"删除成功!");
-							}else if(delete() == false){
-								ObUtil.mToast(container,"删除失败!");
-							}
+							delete();
 							break;
 						case 2:
 							TinyCore();

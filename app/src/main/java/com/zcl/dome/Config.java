@@ -10,7 +10,7 @@ import android.widget.*;
 import android.widget.AdapterView.*;
 import android.app.AlertDialog;
 
-public class ConfigML extends AppCompatActivity
+public class Config extends AppCompatActivity
 {
 	private View Top;
 	private ListView listView;
@@ -38,16 +38,16 @@ public class ConfigML extends AppCompatActivity
 					public void onItemClick(AdapterView<?> p1, View p2, int p3, long p4){
 						switch (p3){
 							case 0:
-								FileDialog(ObUtil.Conf(ConfigML.this,0,"Config",""));
+								FileDialog(ObUtil.Conf(Config.this,0,"Config",""));
 							break;
 							case 1:
-								FileDialog(ObUtil.Conf(ConfigML.this,0,"Start",""));
+								FileDialog(ObUtil.Conf(Config.this,0,"Start",""));
 							break;
 							case 2:
-							FileDialog(ObUtil.Conf(ConfigML.this,0,"Stop",""));
+							FileDialog(ObUtil.Conf(Config.this,0,"Stop",""));
 							break;
 							case 3:
-							FileDialog(ObUtil.Conf(ConfigML.this,0,"Check",""));
+							FileDialog(ObUtil.Conf(Config.this,0,"Check",""));
 							break;
 							case 4:
 							

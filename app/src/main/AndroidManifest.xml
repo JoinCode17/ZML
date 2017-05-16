@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-	
     package="com.zcl.dome">
-	
 	<uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 	<uses-permission
@@ -21,7 +19,7 @@
         android:label="@string/app_name"
 		android:resizeableActivity = "true">
         <activity
-            android:name=".MainActivity"
+            android:name=".Main"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,7 +39,7 @@
 			android:label="@string/pattern">
 		</activity>
 		<activity
-			android:name=".ConfigML"
+			android:name=".Config"
 			android:label="@string/conf">
 		</activity>
 	</application>

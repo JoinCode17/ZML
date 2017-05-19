@@ -177,8 +177,7 @@ public class Main extends AppCompatActivity
 		};
 	};
 
-	private void Tinycc()
-	{
+	private void Tinycc(){
 		webView = new WebView(this);
         WebSettings ws = webView.getSettings();
         ws.setJavaScriptEnabled(false);
@@ -187,8 +186,7 @@ public class Main extends AppCompatActivity
 		builder.setView(webView).show();
 	}
 
-	private void SetColor()
-	{
+	private void SetColor(){
 		builder = new AlertDialog.Builder(this);
 		mview = View.inflate(Main.this, R.layout.coloredit, null);	
 		edit = (EditText) mview.findViewById(R.id.editEditText1);

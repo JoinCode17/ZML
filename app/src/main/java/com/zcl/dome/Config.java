@@ -30,7 +30,7 @@ public class Config extends AppCompatActivity
 			Intent intent = getIntent();  
 			String str = intent.getStringExtra("Color");
 			Top.setBackgroundColor(Color.parseColor(str));
-			String[] companies = new String[] {"配置文件","开启脚本","关闭脚本","检测脚本","自定义①","自定义②","自定义③"};
+			String[] companies = new String[] {"配置文件","开启脚本","关闭脚本","检测脚本"};
 			adapter = new ArrayAdapter<String>(this,R.layout.list,R.id.list1,companies);
 			listView.setAdapter(adapter);
 			listView.setOnItemClickListener(new OnItemClickListener(){		
@@ -48,15 +48,6 @@ public class Config extends AppCompatActivity
 							break;
 							case 3:
 							FileDialog(ObUtil.Conf(Config.this,0,"Check",""));
-							break;
-							case 4:
-							
-							break;
-							case 5:
-							
-							break;
-							case 6:
-							
 							break;
 					}
 	}});

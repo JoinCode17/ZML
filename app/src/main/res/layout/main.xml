@@ -6,117 +6,116 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:orientation="vertical">
-	
-	
-<android.support.design.widget.CoordinatorLayout
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	android:layout_alignParentBottom="false">
 
+	<android.support.design.widget.CoordinatorLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_alignParentBottom="false">
 	
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="vertical"
+		android:gravity="center"
+		android:id="@+id/mainbj">
+
 		<LinearLayout
 			android:layout_height="wrap_content"
 			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:gravity="right|end"
+			android:padding="20dp">
+
+			<Button
+				android:layout_height="20dp"
+				android:layout_width="20dp"
+				android:layout_marginTop="19dp"
+				android:layout_marginEnd="20dp"
+				android:id="@+id/setColor"
+				android:background="@drawable/edit"/>
+
+			<Button
+				android:layout_height="20dp"
+				android:layout_width="20dp"
+				android:background="@drawable/settings"
+				android:id="@+id/setting"
+				android:layout_marginTop="20dp"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="150dp"
+			android:layout_width="match_parent"
 			android:orientation="vertical"
-			android:gravity="center"
-			android:id="@+id/mainbj">
+			android:gravity="center">
+
+			<TextView
+				android:layout_height="35dp"
+				android:layout_width="100dp"
+				android:id="@+id/mainTextViewzt"
+				android:textSize="16sp"
+				android:background="@drawable/ztbj"
+				android:gravity="center"
+				android:textStyle="bold"
+				android:textColor="#FFFFFF"/>
+
+			<TextView
+				android:layout_height="wrap_content"
+				android:layout_width="wrap_content"
+				android:id="@+id/mainTextViewLocal"
+				android:textColor="#FFFFFF"/>
+
+		</LinearLayout>
+
+		<LinearLayout
+			android:layout_height="wrap_content"
+			android:layout_width="match_parent"
+			android:orientation="horizontal"
+			android:padding="12dp">
 
 			<LinearLayout
-				android:layout_height="wrap_content"
+				android:layout_height="46dp"
 				android:layout_width="match_parent"
 				android:orientation="horizontal"
-				android:gravity="right|end"
-				android:padding="20dp">
-
-				<Button
-					android:layout_height="20dp"
-					android:layout_width="20dp"
-					android:layout_marginTop="19dp"
-					android:layout_marginEnd="20dp"
-					android:id="@+id/setColor"
-					android:background="@drawable/edit"/>
-
-				<Button
-					android:layout_height="20dp"
-					android:layout_width="20dp"
-					android:background="@drawable/settings"
-					android:id="@+id/setting"
-					android:layout_marginTop="20dp"/>
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_height="150dp"
-				android:layout_width="match_parent"
-				android:orientation="vertical"
-				android:gravity="center">
+				android:gravity="center|start">
 
 				<TextView
-					android:layout_height="35dp"
-					android:layout_width="100dp"
-					android:id="@+id/mainTextViewzt"
-					android:textSize="16sp"
-					android:background="@drawable/ztbj"
-					android:gravity="center"
-					android:textStyle="bold"
-					android:textColor="#FFFFFF"/>
+					android:layout_height="wrap_content"
+					android:textAppearance="?android:attr/textAppearanceMedium"
+					android:layout_width="wrap_content"
+					android:text="@string/zt"
+					android:textColor="#FFFFFF"
+					android:textSize="34sp"/>
 
 				<TextView
 					android:layout_height="wrap_content"
 					android:layout_width="wrap_content"
-					android:id="@+id/mainTextViewLocal"
+					android:layout_marginStart="10dp"
+					android:id="@+id/mainTextViewTiny"
 					android:textColor="#FFFFFF"/>
-
-			</LinearLayout>
-
-			<LinearLayout
-				android:layout_height="wrap_content"
-				android:layout_width="match_parent"
-				android:orientation="horizontal"
-				android:padding="12dp">
-
-				<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="46dp"
-					android:textAppearance="?android:attr/textAppearanceSmall"
-					android:text="@string/zt"
-					android:textSize="35sp"
-					android:textColor="#FFFFFF"/>
-
-				<LinearLayout
-					android:layout_height="46dp"
-					android:layout_width="match_parent"
-					android:orientation="horizontal"
-					android:gravity="center|start">
-
-					<TextView
-						android:layout_height="wrap_content"
-						android:layout_width="wrap_content"
-						android:layout_marginStart="10dp"
-						android:id="@+id/mainTextViewTiny"
-						android:textColor="#FFFFFF"/>
-
-				</LinearLayout>
 
 			</LinearLayout>
 
 		</LinearLayout>
-		
-		<android.support.design.widget.FloatingActionButton
-			android:layout_width="wrap_content"
-			android:layout_height="wrap_content"
-			android:layout_margin="@dimen/fab_margin"
-			android:clickable="true"
-			android:src="@drawable/ic_add"
-			android:id="@+id/mainfab"
-			app:borderWidth="0dp"
-			app:fabSize="normal"
-			app:layout_anchor="@id/mainbj"
-			app:layout_anchorGravity="bottom|right|end"/>
-	
+
+	</LinearLayout>
+
+	<android.support.design.widget.FloatingActionButton
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_margin="@dimen/fab_margin"
+		android:clickable="true"
+		android:src="@drawable/ic_add"
+		android:id="@+id/mainfab"
+		app:borderWidth="0dp"
+		app:fabSize="normal"
+		app:layout_anchor="@id/mainbj"
+		app:layout_anchorGravity="bottom|right|end"/>
+
 	<include
 		layout="@layout/click"/>
-		
-</android.support.design.widget.CoordinatorLayout>
+
+	</android.support.design.widget.CoordinatorLayout>
 	
 </LinearLayout>
+

@@ -64,9 +64,10 @@ public class Main extends AppCompatActivity
 	}
 	
 	private void State() {
+		
 		tiny.setText("流量 : " + ObUtil.gets() + "\n内网 : " + ObUtil.getIp());
-		String str1 = ShellUtils.execCommand(new String[]{"pgrep Tiny"},false,true).successMsg;
-		String str2 = ShellUtils.execCommand(new String[]{"pgrep tiny"},false,true).successMsg;
+		String str1 = ProcessModel.execute(new String[]{"pgrep Tiny"});
+		String str2 = ProcessModel.execute(new String[]{"pgrep tiny"});
 	//	ObUtil.mToast(container,str1+str2);
 			if (str1 == "" && str2 == ""){
 				tv.setText("未运行 ...");
@@ -141,7 +142,7 @@ public class Main extends AppCompatActivity
 					Message msg = new Message();
 					msg.what = 2;
 					Bundle bundle = new Bundle();
-					bundle.putString("num",ShellUtils.execCommand(str,true,true).successMsg);
+					bundle.putString("num",ProcessModel.execute(str));
 					msg.setData(bundle);
 					handler.sendMessage(msg);
 					handler.sendEmptyMessage(0);// 执行耗时的方法之后发送消给handler
@@ -158,10 +159,10 @@ public class Main extends AppCompatActivity
 						State();
 						break;
 					case 2:
-				String str = msg.getData().getString("num") + "";
-				if (ShellUtils.checkRootPermission() == false){
+				if (ProcessModel.CheckRoot() == false){
 					ObUtil.mToast(container,"未获得ROOT!");
 				}else{
+					String str = msg.getData().getString("num") + "";
 					builder = new AlertDialog.Builder(Main.this);
 					builder.setTitle("执行结果:");
 					builder.setMessage(str);
@@ -247,7 +248,7 @@ public class Main extends AppCompatActivity
 		}
 		
 		private void SElinux(){
-			String s = ShellUtils.execCommand("getenforce",false,true).successMsg;
+			String s = ProcessModel.execute("getenforce");
 			if (Build.VERSION.SDK_INT >= 23 && s.equals("Enforcing\n")){
 			builder = new AlertDialog.Builder(Main.this);
 			builder.setCancelable(false);
@@ -259,7 +260,7 @@ public class Main extends AppCompatActivity
 					});
 				builder.setPositiveButton("关闭", new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int id) {
-							ShellUtils.execCommand(new String[]{"setenforce 0"},true,false);
+							ProcessModel.execute(new String[]{"su","-c","setenforce 0"});
 						}
 					});
 			builder.show();
@@ -271,17 +272,17 @@ public class Main extends AppCompatActivity
 		btn1.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Start","")});
+					RunShellShow(new String[]{"su","-c",ObUtil.Conf(Main.this,0,"Start","")});
 				}});
 		btn2.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Stop","")});
+					RunShellShow(new String[]{"su","-c",ObUtil.Conf(Main.this,0,"Stop","")});
 				}});
 		btn3.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					RunShellShow(new String[]{ObUtil.Conf(Main.this,0,"Check","")});
+					RunShellShow(new String[]{"su","-c",ObUtil.Conf(Main.this,0,"Check","")});
 				}});
 		btn4.setOnClickListener(new OnClickListener() {
 				@Override

@@ -72,14 +72,14 @@ public class Setting extends AppCompatActivity
 		try
 		{
 			ObUtil.upZipFileTwo(f,FileDir);
-			ShellUtils.execCommand(new String[]{"chmod","-R","777",FileDir},false,false);
+			ProcessModel.execute(new String[]{"chmod","-R","777",FileDir});
 			ObUtil.mToast(container,"安装成功");
 			}catch (IOException e){
 			ObUtil.mToast(container,"安装失败!或者已经存在文件");
 		}
 	}
 	private void delete(){
-		ShellUtils.execCommand(new String[]{"rm -rf",Path},false,false);
+		ProcessModel.execute(new String[]{"rm","-rf",Path});
 		ObUtil.mToast(container,"删除成功");
 	}
 	
